@@ -3,13 +3,14 @@ import ContactForm from "./ContactForm/ContactForm";
 import Filter from "./Filter/Filter";
 import ContactList from "./ContactList/ContactList";
 import { useDispatch, useSelector } from "react-redux";
-import { getError, getIsLoading } from "redux/selectors";
+import { getContacts, getError, getIsLoading } from "redux/selectors";
 import { fetchContacts } from "redux/operations";
 import { useEffect } from "react";
 
 
 const App = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
 
@@ -25,10 +26,10 @@ const App = () => {
         <ContactForm />
         <h2>Contacts</h2>
         <Filter />
-        {/* {contacts.length === 0 ?
-          <p>Sorry, there are no contacts in the phonebook yet.</p> : */}
         {isLoading && !error && <b>Request in progress...</b>}
-          <ContactList />
+        {contacts.length === 0 ?
+          <p>Sorry, there are no contacts in the phonebook yet.</p> :
+          <ContactList />}
       </Container>
     </>
   );
