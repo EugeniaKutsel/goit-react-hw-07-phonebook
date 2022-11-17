@@ -3,16 +3,16 @@ import ContactForm from "./ContactForm/ContactForm";
 import Filter from "./Filter/Filter";
 import ContactList from "./ContactList/ContactList";
 import { useDispatch, useSelector } from "react-redux";
-import { getContacts, getError, getIsLoading } from "redux/selectors";
+import { selectContacts, selectError, selectIsLoading } from "redux/selectors";
 import { fetchContacts } from "redux/operations";
 import { useEffect } from "react";
 
 
 const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
